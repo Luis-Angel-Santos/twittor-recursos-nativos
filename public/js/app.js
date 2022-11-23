@@ -82,7 +82,7 @@ var usuario;
 
 // ===== Codigo de la aplicación
 
-function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
+function crearMensajeHTML(mensaje, personaje, lat, lng) {
 
     // console.log(mensaje, personaje, lat, lng);
 
@@ -101,12 +101,12 @@ function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
                 ${ mensaje }
                 `;
     
-    if ( foto ) {
+    /*if ( foto ) {
         content += `
                 <br>
                 <img class="foto-mensaje" src="${ foto }">
         `;
-    }
+    }*/
         
     content += `</div>        
                 <div class="arrow"></div>
@@ -247,7 +247,7 @@ postBtn.on('click', function() {
         user: usuario,
         lat: lat,
         lng: lng,
-        foto: foto
+        //foto: foto
     };
 
 
@@ -262,10 +262,7 @@ postBtn.on('click', function() {
     .then( res => console.log( 'app.js', res ))
     .catch( err => console.log( 'app.js error:', err ));
 
-    camera.apagar();
-    contenedorCamara.addClass('oculto');
-
-    crearMensajeHTML( mensaje, usuario, lat, lng, foto );
+    crearMensajeHTML(mensaje, usuario, lat, lng);
     
     foto = null;
 });
@@ -481,13 +478,22 @@ function mostrarMapaModal(lat, lng) {
 
 
 // Obtener la geolocalización
-btnTomarFoto.on('click', () => {
+btnLocation.on('click', () => {
+    console.log('Botón geolocalización');
+    $.mdtoast('Cargando mapa...', {
+        interaction: true,
+        interactionTimeout: 2000,
+        actionText: 'OK!'
+    });
+    navigator.geolocation.getCurrentPosition(pos => {
+        console.log(pos);
+        mostrarMapaModal(pos.coords.altitude, pos.coords.longitude);
 
-    console.log('Botón tomar foto');
+        lat = pos.coords.altitude;
+        lng = pos.coords.longitude;
+    });
 
 });
-
-
 
 // Boton de la camara
 // usamos la funcion de fleca para prevenir

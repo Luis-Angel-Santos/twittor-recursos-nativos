@@ -22,22 +22,26 @@ router.get('/', function (req, res) {
 
 
 // Post mensaje
-router.post('/', function (req, res) {
-  
+router.post('/', function(req, res) {
+
+  console.log(req.body.lat);
+  console.log(req.body.lng);
 
   const mensaje = {
-    mensaje: req.body.mensaje,
-    user: req.body.user
+      mensaje: req.body.mensaje,
+      user: req.body.user,
+      lat: req.body.lat,
+      lng: req.body.lng
   };
 
-  mensajes.push( mensaje );
+  mensajes.push(mensaje);
 
   // console.log(mensajes);
 
 
   res.json({
-    ok: true,
-    mensaje
+      ok: true,
+      mensaje
   });
 });
 
@@ -48,8 +52,8 @@ router.post('/subscribe', (req, res) => {
 
   const suscripcion = req.body;
 
-  
-  push.addSubscription( suscripcion );
+
+  push.addSubscription(suscripcion);
 
 
   res.json('subscribe');
