@@ -1,29 +1,31 @@
+var titulo = $('#titulo');
+var nuevoBtn = $('#nuevo-btn');
+var salirBtn = $('#salir-btn');
+var cancelarBtn = $('#cancel-btn');
+var postBtn = $('#post-btn');
+var avatarSel = $('#seleccion');
+var timeline = $('#timeline');
 
-var url = window.location.href;
-var swLocation = '/twittor/sw.js';
+var modal = $('#modal');
+var modalAvatar = $('#modal-avatar');
+var avatarBtns = $('.seleccion-avatar');
+var txtMensaje = $('#txtMensaje');
 
-var swReg;
-
-if ( navigator.serviceWorker ) {
-
-
-    if ( url.includes('localhost') ) {
-        swLocation = '/sw.js';
-    }
+var btnActivadas = $('.btn-noti-activadas');
+var btnDesactivadas = $('.btn-noti-desactivadas');
 
 
-    window.addEventListener('load', function() {
+var btnLocation = $('#location-btn');
 
-        navigator.serviceWorker.register( swLocation ).then( function(reg){
+var modalMapa = $('.modal-mapa');
 
-            swReg = reg;
-            swReg.pushManager.getSubscription().then( verificaSuscripcion );
+var btnTomarFoto = $('#tomar-foto-btn');
+var btnPhoto = $('#photo-btn');
+var contenedorCamara = $('.camara-contenedor');
 
-        });
-
-    });
-
-}
+var lat = null;
+var lng = null;
+var foto = null;
 
 
 
@@ -479,10 +481,9 @@ function mostrarMapaModal(lat, lng) {
 
 
 // Obtener la geolocalización
-btnLocation.on('click', () => {
+btnTomarFoto.on('click', () => {
 
-    console.log('Botón geolocalización');
-    
+    console.log('Botón tomar foto');
 
 });
 
